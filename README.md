@@ -38,8 +38,8 @@ Regardless of whether you're running spark-submit or pyspark, the following para
 ${command} \
     --master yarn \
     --deploy-mode client \
-    --conf spark.yarn.appMasterEnv.PYSPARK_PYTHON=./${venv}/bin/python \
-    --archives "${project_venv}/${venv}-current.zip#${venv}" \
+    --conf spark.yarn.appMasterEnv.PYSPARK_PYTHON="./${venv}/bin/python" \
+    --conf spark.yarn.dist.archives="file:///${project_venv}/${venv}-current.zip#${venv}" \
     $@
 ```
 
