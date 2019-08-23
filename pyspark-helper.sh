@@ -138,7 +138,7 @@ export PATH="${SPARK_HOME}/bin:${PATH}"
 # pyspark
 export PYTHONPATH=“${SPARK_HOME}/python:${SPARK_HOME}/python/lib/py4j-0.10.6-src.zip
 export PYSPARK_DRIVER_PYTHON=`which python`
-export PYSPARK_PYTHON=./${venv}-current.zip/bin/python
+export PYSPARK_PYTHON=./${venv}/bin/python
 
 #------------------------------------------------------------------------------
 # SPARK
@@ -156,8 +156,8 @@ if [ -f ${project_venv}/${venv}-current.zip ]; then
     $command \
         --master yarn \
         --deploy-mode client \
-        --conf spark.yarn.appMasterEnv.PYSPARK_PYTHON=./${venv}-current.zip/bin/python \
-        --archives "${project_venv}/${venv}-current.zip#${venv}" \
+        --conf spark.yarn.appMasterEnv.PYSPARK_PYTHON="./${venv}/bin/python" \
+        --conf spark.yarn.dist.archives="file:///${project_venv}/${venv}-current.zip#${venv}" \
         $@
 else
     echo -e "${RED}==> ERROR: Virtual Env Zip ${project_venv}/${venv}-current.zip Not Found${NC}"
