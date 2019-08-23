@@ -49,7 +49,7 @@ By default this script will launch spark-submit and append your parameters, alon
 
 ```bash
 # spark-submit pyspark script
-$ ./pyspark-helper.sh ./examples/pyspark-numpy-test.py
+$ ./pyspark-helper.sh ./examples/pyspark-pandas-test.py
 ```
 
 If you would prefer an interactive shell instead, pass the --shell param to his helper script.
