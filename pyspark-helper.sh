@@ -136,7 +136,7 @@ export SPARK_HOME=/data/opt/spark/${spark}
 export PATH="${SPARK_HOME}/bin:${PATH}"
 
 # pyspark
-export PYTHONPATH=“${SPARK_HOME}/python:${SPARK_HOME}/python/lib/py4j-0.10.6-src.zip
+export PYTHONPATH="${SPARK_HOME}/python:${SPARK_HOME}/python/lib/py4j-0.10.6-src.zip"
 export PYSPARK_DRIVER_PYTHON=`which python`
 export PYSPARK_PYTHON=./${venv}/bin/python
 
