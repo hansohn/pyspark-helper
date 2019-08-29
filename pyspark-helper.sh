@@ -88,7 +88,7 @@ fi
 # create anaconda venv if missing
 if ! grep -q "${venv}" <(conda env list); then
     echo -e "${GREEN}==> Creating Anaconda ${venv} Virtual Environment${NC}"
-    conda create -n "${venv}" -copy python=${python} anaconda -y
+    conda create -n "${venv}" --copy python=${python} anaconda -y
     venv_updated=true
 fi
 conda activate ${venv}
