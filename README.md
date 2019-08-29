@@ -35,7 +35,7 @@ Regardless of whether you're running spark-submit or pyspark, the following para
 
 ```bash
 # command with default parameters
-${command} \
+$ {command} \
     --master yarn \
     --deploy-mode client \
     --conf spark.yarn.appMasterEnv.PYSPARK_PYTHON="./${venv}/bin/python" \
