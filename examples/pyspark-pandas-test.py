@@ -3,10 +3,9 @@ from pyspark.conf import SparkConf
 from pyspark.context import SparkContext
 from pyspark.sql import SQLContext
 
-if sc is None:
-        conf = SparkConf()
-        conf.setAppName('pyspark-pandas-test')
-        sc = SparkContext(conf=conf)
+conf = SparkConf()
+conf.setAppName('pyspark-pandas-test')
+sc = SparkContext(conf=conf)
 sqlContext = SQLContext(sc)
 
 data = {"country": ["Brazil", "Russia", "India", "China", "South Africa"],
