@@ -88,7 +88,7 @@ fi
 # create anaconda venv if missing
 if ! grep -q "${venv}" <(conda env list); then
     echo -e "${GREEN}==> Creating Anaconda ${venv} Virtual Environment${NC}"
-    conda create -n "${venv}" --copy python=${python} anaconda -y
+    conda create -n "${venv}" --copy python=${python} -y
     venv_updated=true
 fi
 conda activate ${venv}
@@ -136,9 +136,10 @@ export SPARK_HOME=/data/opt/spark/${spark}
 export PATH="${SPARK_HOME}/bin:${PATH}"
 
 # pyspark
-export PYTHONPATH="${SPARK_HOME}/python:${SPARK_HOME}/python/lib/py4j-0.10.6-src.zip"
+export PYTHONPATH="${SPARK_HOME}/python:${SPARK_HOME}/python/lib/py4j-0.10.6-src.zip:${SPARK_HOME}/python/lib/pyspark.zip"
 export PYSPARK_DRIVER_PYTHON=`which python`
 export PYSPARK_PYTHON=./${venv}/bin/python
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${venv}/lib"
 
 #------------------------------------------------------------------------------
 # SPARK
@@ -158,6 +159,8 @@ if [ -f ${project_venv}/${venv}-current.zip ]; then
         --deploy-mode client \
         --conf spark.yarn.appMasterEnv.PYSPARK_PYTHON="./${venv}/bin/python" \
         --conf spark.yarn.dist.archives="file:///${project_venv}/${venv}-current.zip#${venv}" \
+        --conf spark.yarn.dist.files="${SPARK_HOME}/python/lib/py4j-0.10.6-src.zip,${SPARK_HOME}/python/lib/pyspark.zip" \
+        --conf spark.executorEnv.PYTHONPATH="py4j-0.10.6-src.zip:pyspark.zip" \
         $@
 else
     echo -e "${RED}==> ERROR: Virtual Env Zip ${project_venv}/${venv}-current.zip Not Found${NC}"

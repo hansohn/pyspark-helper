@@ -1,11 +1,12 @@
+import pandas as pd
 from pyspark.conf import SparkConf
 from pyspark.context import SparkContext
 from pyspark.sql import SQLContext
-import pandas as pd
 
-conf = SparkConf()
-conf.setAppName('pyspark-pandas-test')
-sc = SparkContext(conf=conf)
+if sc is None:
+        conf = SparkConf()
+        conf.setAppName('pyspark-pandas-test')
+        sc = SparkContext(conf=conf)
 sqlContext = SQLContext(sc)
 
 data = {"country": ["Brazil", "Russia", "India", "China", "South Africa"],
@@ -16,5 +17,3 @@ data = {"country": ["Brazil", "Russia", "India", "China", "South Africa"],
 pd_df = pd.DataFrame(data, columns=data.keys())
 df = sqlContext.createDataFrame(pd_df)
 df.show()
-
-sc.stop()
